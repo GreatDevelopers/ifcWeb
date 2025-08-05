@@ -292,3 +292,6 @@ Collection of web components (UI components) meant to be used, but not limited t
 Collection of web components (UI components) implementations to use with @thatopen/components.
 
  yarn dev --host
+
+ npm install @thatopen/components @thatopen/components-front @thatopen/fragments @thatopen/ui @thatopen/ui-obc
+
