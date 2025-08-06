@@ -1,33 +1,35 @@
-    1  wget https://raw.githubusercontent.com/GreatDevelopers/ifcWeb/refs/heads/main/docs/nuxt.sh
-    9  bash nuxt.sh 
-    5  npm create nuxt@latest bb-ds
+```sh
+wget https://raw.githubusercontent.com/GreatDevelopers/ifcWeb/refs/heads/main/docs/nuxt.sh
+bash nuxt.sh
+npm create nuxt@latest bb-ds
 
-    6  cd bb-ds/
-    7  npm install @thatopen/components @thatopen/components-front @thatopen/fragments @thatopen/ui @thatopen/ui-obc
-    9  cat nuxt.config.ts // add lined to this file
-   12  mkdir pages
-   13  cd pages/
-   14  wget https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/pages/index.vue
-   15  cd ..
-   17  mkdir components
-   18  cd components/
-   19  wget https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/components/WorldExample.vue
-   15  cd ~/bb-ds/app
-   17  joe app.vue 
-   19  cd ..
-   21  mv app/app.vue ~/
-   20  npm run dev -- --host   
-   23  cd ..
-   26  rm -rf .nuxt/
-   27  npm run dev -- --host
-
+cd bb-ds/
+npm install @thatopen/components @thatopen/components-front @thatopen/fragments @thatopen/ui @thatopen/ui-obc
+cat nuxt.config.ts // add lined to this file
+mkdir pages
+cd pages/
+wget https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/pages/index.vue
+cd ..
+mkdir components
+cd components/
+wget https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/components/WorldExample.vue
+cd ~/bb-ds/app
+joe app.vue
+cd ..
+mv app/app.vue ~/
+npm run dev -- --host
+cd ..
+rm -rf .nuxt/
+npm run dev -- --host
 
 ==========
 cd ~/bb-ds
 nuxt@ho:~/bb-ds$ cat package.json // see if it needed to be amended
 
 ===============
+```
 
+```sh
   ➜ Local:    http://localhost:3000/
   ➜ Network:  http://192.168.137.199:3000/ [QR code]
 
@@ -168,3 +170,4 @@ To address all issues (including breaking changes), run:
   npm audit fix --force
 
 Run `npm audit` for details.
+```
