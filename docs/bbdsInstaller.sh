@@ -181,5 +181,73 @@ version_check
 install_nvm
 install_node
 
+# Version check after installation
+version_check
+
+# ------------------------------
+# Project Bootstrapping: Nuxt Setup, File Fetch, Initial Run
+# ------------------------------
+
+log_msg "INFO" "Running npm create for nuxt@latest with project bb-ds"
+if npm create nuxt@latest bb-ds 2>&1 | tee -a "$LOGFILE"; then
+  log_msg "INFO" "Nuxt project bb-ds created successfully."
+else
+  log_msg "ERROR" "Failed to create Nuxt project bb-ds."
+  exit 8
+fi
+
 log_msg "INFO" "bbdsInstaller.sh completed successfully."
+
+cd bb-ds || { log_msg "ERROR" "Failed to cd into bb-ds"; exit 9; }
+
+log_msg "INFO" "Running npm install for required packages"
+if npm install @thatopen/components @thatopen/components-front @thatopen/fragments @thatopen/ui @thatopen/ui-obc 2>&1 | tee -a "$LOGFILE"; then
+  log_msg "INFO" "NPM packages installed successfully."
+else
+  log_msg "ERROR" "Failed to install NPM packages."
+  exit 10
+fi
+
+log_msg "INFO" "Creating folders pages and components"
+mkdir -p pages components
+
+cd pages || { log_msg "ERROR" "Failed to cd into pages folder"; exit 11; }
+
+# Download Nuxt page files using curl (not wget)
+urls=(
+  "https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/pages/index.vue"
+  "https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/pages/indexRai.vue"
+)
+
+for url in "${urls[@]}"; do
+  file_name=$(basename "$url")
+  log_msg "INFO" "Downloading $file_name from $url"
+  if curl -fsSL "$url" -o "$file_name" 2>&1 | tee -a "$LOGFILE"; then
+    log_msg "INFO" "$file_name downloaded successfully."
+  else
+    log_msg "ERROR" "Failed to download $file_name"
+    exit 12
+  fi
+done
+
+cd ../components || { log_msg "ERROR" "Failed to cd into components folder"; exit 13; }
+
+url_component="https://raw.githubusercontent.com/GreatDevelopers/bb-ds/refs/heads/main/components/WorldExample.vue"
+file_component="WorldExample.vue"
+log_msg "INFO" "Downloading $file_component from $url_component"
+if curl -fsSL "$url_component" -o "$file_component" 2>&1 | tee -a "$LOGFILE"; then
+  log_msg "INFO" "$file_component downloaded successfully."
+else
+  log_msg "ERROR" "Failed to download $file_component"
+  exit 14
+fi
+
+cd ..
+
+log_msg "INFO" "Moving app/app.vue files to parent directory"
+mv app/app.vue* ../ 2>&1 | tee -a "$LOGFILE"
+
+log_msg "INFO" "Starting npm development server with host enabled"
+npm run dev -- --host 2>&1 | tee -a "$LOGFILE"
+
 echo -e "\nAll steps complete! See the log file at $LOGFILE for details."
