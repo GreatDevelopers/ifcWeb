@@ -156,8 +156,8 @@ install_node() {
 }
 
 nuxt_setup() {
-  log_msg "INFO" "Running npm create for nuxt@latest with project bb-ds"
-  if npm create nuxt@latest bb-ds 2>&1 | tee -a "$LOGFILE"; then
+  log_msg "INFO" "Running npm create for nuxt@latest with project bb-ds and --yes"
+  if npm create nuxt@latest bb-ds -- --yes 2>&1 | tee -a "$LOGFILE"; then
     log_msg "INFO" "Nuxt project bb-ds created successfully."
   else
     log_msg "ERROR" "Failed to create Nuxt project bb-ds."
@@ -240,6 +240,10 @@ version_check
 install_nvm
 install_node
 nuxt_setup
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+[ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
 log_msg "INFO" "bbdsInstaller.sh completed successfully."
 echo -e "\nAll steps complete! See the log file at $LOGFILE for details."
