@@ -212,8 +212,8 @@ nuxt_setup() {
   log_msg "INFO" "Moving app/app.vue files to parent directory"
   mv app/app.vue* ../ 2>&1 | tee -a "$LOGFILE"
 
-  log_msg "INFO" "Starting npm development server with host enabled"
-  npm run dev -- --host 2>&1 | tee -a "$LOGFILE"
+  log_msg "INFO" "Starting npm development server with host enabled, by issuing command\n\n npm run dev -- --host \n\n"
+  #npm run dev -- --host 2>&1 | tee -a "$LOGFILE"
 }
 
 # --------- MAIN SCRIPT ----------
