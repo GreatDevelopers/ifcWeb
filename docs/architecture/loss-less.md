@@ -80,3 +80,6 @@ This workflow enables a full round-trip of editing and saving directly to an IFC
     * Once the edits are applied, **IfcOpenShell** writes a completely new, updated `.ifc` file to the server. This new file incorporates all the user's changes while preserving the rest of the original data model.
 
 This approach ensures that the `.ifc` file itself is the central point of truth, making your application truly open and interoperable.
+
+
+https://g.co/gemini/share/deebd9d4468d
